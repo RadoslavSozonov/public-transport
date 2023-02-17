@@ -8,7 +8,7 @@ import DropDownMenu from "../Filters/DropDownMenu/DropDownMenu"
 import TextInputFilter from "../Filters/TextInputFilter/TextInputFilter";
 import loadLineStringLayer from "../../loadLayersFunc";
 import RouteInformation from "../RouteInformation/RouteInformation";
-import { Slider } from '@material-ui/core'
+// import { Slider } from '@material-ui/core'
 // import { useStore } from "react-context-hook";
 const MainComponent = () => {
 
@@ -56,13 +56,13 @@ const MainComponent = () => {
                 </div>   
                 <div className={styles.deleteFilters}><RemoveOption offset={offset} filter={filter} setFilter={setFilter} geoDataPTLines={geoDataPTLines} map={map} setDisplayGeoDataPTLines={setDisplayGeoDataPTLines}/></div>
                 <div className={styles.sliderDiv}>
-                    <Slider 
+                    {/* <Slider 
                         style={{width: "95%"}} 
                         min={0} 
                         max={25}
                         onChange={sliderChange} 
                         aria-labelledby="input-slider" 
-                    />
+                    /> */}
                 </div>
 
             </div> 
