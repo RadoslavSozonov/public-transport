@@ -67,7 +67,7 @@ const Map = (
 
     const map = new mapboxgl.Map({
       container: mapContainerRef.current as string | HTMLElement,
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: 'mapbox://styles/ecuzmici/ckxhn19g40e1p14moxofji6oh',
       center: [lng, lat], //coordinates for Amsterdam
       zoom: 10,
     });
