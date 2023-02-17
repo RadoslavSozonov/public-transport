@@ -12,6 +12,14 @@ import selectedLineLayer from './selected_line-layer.json';
 import setLayerToMap from './functions/setLayerToMap';
 import createLayer from './functions/createLayer';
 
+
+// The following is required to stop "npm build" from transpiling mapbox code.
+// notice the exclamation point in the import.
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+
+
 const Map = (
   {
     offset,
