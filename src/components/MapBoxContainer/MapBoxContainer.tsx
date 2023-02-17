@@ -8,12 +8,13 @@ import Stop from '../../interfaces/Stops';
 import { FeatureCollection, Geometry, GeoJsonProperties } from 'geojson';
 import loadLineStringLayer from '../../loadLayersFunc';
 import selectedLineLayer from './selected_line-layer.json';
-import { useStore } from 'react-context-hook';
+// import { useStore } from 'react-context-hook';
 import setLayerToMap from './functions/setLayerToMap';
 import createLayer from './functions/createLayer';
 
 const Map = (
   {
+    offset,
     setDisplayGeoDataPTLines,
     setSelectedRoute,
     setMap,
@@ -23,6 +24,7 @@ const Map = (
     setShapeIdStopsMap,
     setStopIdsMap
   }: {
+    offset: number,
     setDisplayGeoDataPTLines: React.Dispatch<React.SetStateAction<GeoJSON.FeatureCollection<GeoJSON.Geometry>|undefined>>,
     setSelectedRoute: React.Dispatch<React.SetStateAction<[number, string, string, string, string, string, boolean]>>,
     setMap: React.Dispatch<React.SetStateAction<mapboxgl.Map | null>>,
@@ -33,7 +35,7 @@ const Map = (
     setStopIdsMap: React.Dispatch<React.SetStateAction<Map<number, Stop>|null|undefined>>
   }) => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
-  const [offset, , ] = useStore('offset');
+  // const [offset, , ] = useStore('offset');
 
   const [lng, ] = useState(4.9041);
   const [lat, ] = useState(52.3676);

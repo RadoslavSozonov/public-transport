@@ -3,7 +3,7 @@ import connectionsLayer from './components/MapBoxContainer/connections-layer.jso
 import {jsonInterfaceConverterRoutes} from './components/MapBoxContainer/functions/jsonInterfaceConverter';
 import ShapeIds from './interfaces/ShapeIds';
 import setLayerToMap from './components/MapBoxContainer/functions/setLayerToMap';
-import Stop from './interfaces/Stops';
+// import Stop from './interfaces/Stops';
 import createLayer from './components/MapBoxContainer/functions/createLayer';
 
 const loadLineStringLayer = (

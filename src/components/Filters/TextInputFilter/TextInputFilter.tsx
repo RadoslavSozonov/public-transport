@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useStore } from "react-context-hook";
+// import { useStore } from "react-context-hook";
 import loadLineStringLayer from "../../../loadLayersFunc";
 import styles from './textInputFilter.module.css';
 import {addNewValueToFilter, removeSingleFilterValue, removeAllFilters} from '../filterFunctions'
 
 const TextInputFilter = ({
+    offset,
     filter,
     setFilter,
     name, 
@@ -12,6 +13,7 @@ const TextInputFilter = ({
     map, 
     setDisplayGeoDataPTLines
 }: {
+    offset: number,
     filter: {"Agency": Set<string>, "Vehicle Type": Set<string>, "Line Number": Set<string>},
     setFilter:React.Dispatch<{"Agency": Set<string>, "Vehicle Type": Set<string>, "Line Number": Set<string>}>,
     name: string, 
@@ -19,7 +21,7 @@ const TextInputFilter = ({
     map: mapboxgl.Map | null, 
     setDisplayGeoDataPTLines: React.Dispatch<React.SetStateAction<GeoJSON.FeatureCollection<GeoJSON.Geometry>|undefined>>
 }) => {
-    const [offset,,] = useStore('offset');
+    // const [offset,,] = useStore('offset');
 
     const [openClose, changeOpenCloseState] = useState<boolean>(false);
     const [lineNumber, setNewLineNumber] = useState<string>("");
@@ -52,7 +54,7 @@ const TextInputFilter = ({
         const linesNumList: JSX.Element[] = []; 
         let i = 0
         filter["Line Number"].forEach((element: string) => {
-            linesNumList.push(<LineNumberOption key={i} index={i+1} lineNum={element} filter={filter} setFilter={setFilter} geoDataPTLines={geoDataPTLines} map={map} setDisplayGeoDataPTLines={setDisplayGeoDataPTLines}/>)
+            linesNumList.push(<LineNumberOption offset={offset} key={i} index={i+1} lineNum={element} filter={filter} setFilter={setFilter} geoDataPTLines={geoDataPTLines} map={map} setDisplayGeoDataPTLines={setDisplayGeoDataPTLines}/>)
             i+=1
         })
         return linesNumList
@@ -80,9 +82,10 @@ const TextInputFilter = ({
     );
 }
 
-const LineNumberOption = ({index, lineNum, filter, setFilter, geoDataPTLines,
+const LineNumberOption = ({offset, index, lineNum, filter, setFilter, geoDataPTLines,
     map, setDisplayGeoDataPTLines}: 
     {
+        offset: number,
         index: number, 
         lineNum: string,
         filter: {"Agency": Set<string>, "Vehicle Type": Set<string>, "Line Number": Set<string>},
@@ -91,7 +94,7 @@ const LineNumberOption = ({index, lineNum, filter, setFilter, geoDataPTLines,
         map: mapboxgl.Map | null, 
         setDisplayGeoDataPTLines: React.Dispatch<React.SetStateAction<GeoJSON.FeatureCollection<GeoJSON.Geometry>|undefined>>
     }) => {
-    const [offset,,] = useStore('offset');
+    // const [offset,,] = useStore('offset');
 
     const removeLine = () => {
         if(geoDataPTLines===undefined){

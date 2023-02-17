@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useStore } from "react-context-hook";
+// import { useStore } from "react-context-hook";
 import loadLineStringLayer from '../../../loadLayersFunc';
 import styles from './dropDownMenu.module.css'
 import {addNewValueToFilter, removeSingleFilterValue, removeAllFilters} from '../filterFunctions'
 
 const DropDownMenu = (
     {
+        offset,
         filter,
         setFilter,
         map, 
@@ -15,6 +16,7 @@ const DropDownMenu = (
         name
     }:
     {
+        offset: number,
         filter: {"Agency": Set<string>, "Vehicle Type": Set<string>, "Line Number": Set<string>},
         setFilter: React.Dispatch<{"Agency": Set<string>, "Vehicle Type": Set<string>, "Line Number": Set<string>}>,
         map: mapboxgl.Map | null, 
@@ -29,10 +31,10 @@ const DropDownMenu = (
         const options: JSX.Element[] = [];
         let i=0;
         dropDownOptions?.forEach((element)=>{
-            options.push(<Option key={i+1} ddMenuName={name} setDisplayGeoDataPTLines={setDisplayGeoDataPTLines} setState={setState} filter={filter} setFilter={setFilter} name={element} map={map} geoDataPTLines={geoDataPTLines} number={i+1}/>)
+            options.push(<Option offset={offset} key={i+1} ddMenuName={name} setDisplayGeoDataPTLines={setDisplayGeoDataPTLines} setState={setState} filter={filter} setFilter={setFilter} name={element} map={map} geoDataPTLines={geoDataPTLines} number={i+1}/>)
             i+=1
         })
-        options.push(<RemoveFilters ddMenuName={name} key={i+1} number={i+1} setDisplayGeoDataPTLines={setDisplayGeoDataPTLines} setState={setState} filter={filter} setFilter={setFilter} name={"Remove"} map={map} geoDataPTLines={geoDataPTLines}/>)
+        options.push(<RemoveFilters offset={offset} ddMenuName={name} key={i+1} number={i+1} setDisplayGeoDataPTLines={setDisplayGeoDataPTLines} setState={setState} filter={filter} setFilter={setFilter} name={"Remove"} map={map} geoDataPTLines={geoDataPTLines}/>)
         return options
     }
     return (<>
@@ -43,6 +45,7 @@ const DropDownMenu = (
 
 const Option = (
     {
+        offset,
         ddMenuName,
         number,
         setDisplayGeoDataPTLines,
@@ -54,6 +57,7 @@ const Option = (
         geoDataPTLines
     }:
     {
+        offset: number,
         ddMenuName: string,
         number: number,
         setDisplayGeoDataPTLines: React.Dispatch<React.SetStateAction<GeoJSON.FeatureCollection<GeoJSON.Geometry>|undefined>>,
@@ -64,7 +68,7 @@ const Option = (
         map: mapboxgl.Map | null, 
         geoDataPTLines:GeoJSON.FeatureCollection<GeoJSON.Geometry>|undefined
     }) => {
-    const [offset,,] = useStore('offset');
+    // const [offset,,] = useStore('offset');
 
     const addRemoveOption = () => {
 
@@ -99,6 +103,7 @@ const Option = (
 
 const RemoveFilters = (
     {
+        offset,
         ddMenuName,
         number,
         setDisplayGeoDataPTLines,
@@ -109,6 +114,7 @@ const RemoveFilters = (
         map, 
         geoDataPTLines}:
     {
+        offset: number,
         ddMenuName: string,
         number: number,
         setDisplayGeoDataPTLines: React.Dispatch<React.SetStateAction<GeoJSON.FeatureCollection<GeoJSON.Geometry>|undefined>>,
@@ -120,7 +126,7 @@ const RemoveFilters = (
         geoDataPTLines:GeoJSON.FeatureCollection<GeoJSON.Geometry>|undefined
     }) => {
         
-    const [offset,,] = useStore('offset');
+    // const [offset,,] = useStore('offset');
 
     return <div className={styles.optionsDiv}
     onClick={()=>{
