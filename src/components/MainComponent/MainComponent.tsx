@@ -8,6 +8,7 @@ import DropDownMenu from "../Filters/DropDownMenu/DropDownMenu"
 import TextInputFilter from "../Filters/TextInputFilter/TextInputFilter";
 import loadLineStringLayer from "../../loadLayersFunc";
 import RouteInformation from "../RouteInformation/RouteInformation";
+import Slider from "@mui/material/Slider"
 // import { Slider } from '@material-ui/core'
 // import { useStore } from "react-context-hook";
 const MainComponent = () => {
@@ -21,27 +22,27 @@ const MainComponent = () => {
     const [modalitiesSet, setModalitiesSet] = useState<Set<string>|null>();
     const [filter, setFilter] = useState<{"Agency": Set<string>, "Vehicle Type": Set<string>, "Line Number": Set<string>}>({"Agency": new Set<string>(), "Vehicle Type": new Set<string>(), "Line Number": new Set<string>()})
     const [selectedRoute, setSelectedRoute] = useState<[number, string, string, string, string, string, boolean]>([-1, "", "", "", "", "", false])
-    const [offset,] = useState<number>(0);
+    const [offset, setOffset] = useState<number>(0);
     // const [, setOffset, ] = useStore('offset')
 
-    // const sliderChange = (e: React.ChangeEvent<{}>, newValue: number | number[]) => {
-    //     // console.log(newValue);
-    //     if (typeof(newValue) === "number") {
-    //         setOffset(newValue)
-    //         if(map?.getLayer('connecting-lines-fill') !== undefined) {
-    //             map?.setPaintProperty("connecting-lines-fill", "line-offset", newValue);
-    //         }
+    const sliderChange = (newValue: number | number[]) => {
+        // console.log(newValue);
+        if (typeof(newValue) === "number") {
+            setOffset(newValue)
+            if(map?.getLayer('connecting-lines-fill') !== undefined) {
+                map?.setPaintProperty("connecting-lines-fill", "line-offset", newValue);
+            }
             
-    //         if(map?.getLayer('selected_line') !== undefined) {
-    //             map?.setPaintProperty("selected_line", "line-offset", newValue);
-    //         }
+            if(map?.getLayer('selected_line') !== undefined) {
+                map?.setPaintProperty("selected_line", "line-offset", newValue);
+            }
 
-    //         if(map?.getLayer('stops-fill') !== undefined) {
-    //             map?.setPaintProperty("stops-fill", "circle-translate", [newValue, 0]);
-    //         }
-    //     }
+            if(map?.getLayer('stops-fill') !== undefined) {
+                map?.setPaintProperty("stops-fill", "circle-translate", [newValue, 0]);
+            }
+        }
         
-    // }
+    }
     
     return (
         <div>
@@ -56,13 +57,13 @@ const MainComponent = () => {
                 </div>   
                 <div className={styles.deleteFilters}><RemoveOption offset={offset} filter={filter} setFilter={setFilter} geoDataPTLines={geoDataPTLines} map={map} setDisplayGeoDataPTLines={setDisplayGeoDataPTLines}/></div>
                 <div className={styles.sliderDiv}>
-                    {/* <Slider 
+                    <Slider 
                         style={{width: "95%"}} 
                         min={0} 
                         max={25}
-                        onChange={sliderChange} 
+                        onChange={(_,x) => sliderChange(x)} 
                         aria-labelledby="input-slider" 
-                    /> */}
+                    />
                 </div>
 
             </div> 
