@@ -9,12 +9,14 @@ import TextInputFilter from "../Filters/TextInputFilter/TextInputFilter";
 import loadLineStringLayer from "../../loadLayersFunc";
 import RouteInformation from "../RouteInformation/RouteInformation";
 import Slider from "@mui/material/Slider"
+import {useSelector, useDispatch} from 'react-redux'
+import { RootStore } from "../../index";
 // import { Slider } from '@material-ui/core'
 // import { useStore } from "react-context-hook";
 const MainComponent = () => {
-
+    const geoDataPTLines = useSelector((state: RootStore) => state.currentGeoDataPTLinesReducer)
     const [map, setMap] = useState<mapboxgl.Map | null>(null);
-    const [geoDataPTLines, setGeoDataPTLines] = useState<GeoJSON.FeatureCollection<GeoJSON.Geometry>>();
+    // const [geoDataPTLines, setGeoDataPTLines] = useState<GeoJSON.FeatureCollection<GeoJSON.Geometry>>();
     const [displayGeoDataPTLines, setDisplayGeoDataPTLines] = useState<GeoJSON.FeatureCollection<GeoJSON.Geometry>>();
     const [shapeIdStopsMapCont, setShapeIdStopsMap] = useState<Map<number, ShapeIdStops>|null>(); 
     const [stopIdsMapCont, setStopIdsMap] = useState<Map<number, Stop>|null>();
@@ -51,9 +53,9 @@ const MainComponent = () => {
                     <RoutesList geoDataPTLines={displayGeoDataPTLines}/>
                 </div>
                 <div className={styles.filtersDiv}>
-                   <div className={styles.filterDiv}><DropDownMenu offset={offset} filter={filter} setFilter={setFilter} map={map} setDisplayGeoDataPTLines={setDisplayGeoDataPTLines} geoDataPTLines={geoDataPTLines} dropDownOptions={agenciesSet} name={"Agency"}/></div>
-                   <div className={styles.filterDiv}><DropDownMenu offset={offset} filter={filter} setFilter={setFilter} map={map} setDisplayGeoDataPTLines={setDisplayGeoDataPTLines} geoDataPTLines={geoDataPTLines} dropDownOptions={modalitiesSet} name={"Vehicle Type"}/></div>
-                   <div className={styles.filterDiv}><TextInputFilter offset={offset} filter={filter} setFilter={setFilter} name={"Line Number"} geoDataPTLines={geoDataPTLines} map={map} setDisplayGeoDataPTLines={setDisplayGeoDataPTLines}/></div>
+                   <div className={styles.filterDiv}><DropDownMenu offset={offset} filter={filter} setFilter={setFilter} map={map} setDisplayGeoDataPTLines={setDisplayGeoDataPTLines} dropDownOptions={agenciesSet} name={"Agency"}/></div>
+                   <div className={styles.filterDiv}><DropDownMenu offset={offset} filter={filter} setFilter={setFilter} map={map} setDisplayGeoDataPTLines={setDisplayGeoDataPTLines} dropDownOptions={modalitiesSet} name={"Vehicle Type"}/></div>
+                   <div className={styles.filterDiv}><TextInputFilter offset={offset} filter={filter} setFilter={setFilter} name={"Line Number"} map={map} setDisplayGeoDataPTLines={setDisplayGeoDataPTLines}/></div>
                 </div>   
                 <div className={styles.deleteFilters}><RemoveOption offset={offset} filter={filter} setFilter={setFilter} geoDataPTLines={geoDataPTLines} map={map} setDisplayGeoDataPTLines={setDisplayGeoDataPTLines}/></div>
                 <div className={styles.sliderDiv}>
@@ -68,7 +70,7 @@ const MainComponent = () => {
 
             </div> 
             <div>
-                <Map offset={offset} setDisplayGeoDataPTLines={setDisplayGeoDataPTLines} setSelectedRoute={setSelectedRoute} setMap={setMap} setAgenciesSet={setAgenciesSet} setModalitiesSet={setModalitiesSet} setGeoDataPTLines={setGeoDataPTLines} setShapeIdStopsMap={setShapeIdStopsMap} setStopIdsMap={setStopIdsMap}/>
+                <Map offset={offset} setDisplayGeoDataPTLines={setDisplayGeoDataPTLines} setSelectedRoute={setSelectedRoute} setMap={setMap} setAgenciesSet={setAgenciesSet} setModalitiesSet={setModalitiesSet} setShapeIdStopsMap={setShapeIdStopsMap} setStopIdsMap={setStopIdsMap}/>
             </div>   
             <div>
                 <RouteInformation selectedRoute={selectedRoute} setSelectedRoute={setSelectedRoute} stopIdsMapCont={stopIdsMapCont} stopsIds={shapeIdStopsMapCont?.get(selectedRoute[0])?.stops_ids}/>    

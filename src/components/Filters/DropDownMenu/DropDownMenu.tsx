@@ -1,8 +1,10 @@
 import { useState } from "react";
 // import { useStore } from "react-context-hook";
+import {useSelector, useDispatch} from 'react-redux'
 import loadLineStringLayer from '../../../loadLayersFunc';
 import styles from './dropDownMenu.module.css'
 import {addNewValueToFilter, removeSingleFilterValue, removeAllFilters} from '../filterFunctions'
+import { RootStore } from '../../../index';
 
 const DropDownMenu = (
     {
@@ -11,7 +13,7 @@ const DropDownMenu = (
         setFilter,
         map, 
         setDisplayGeoDataPTLines,
-        geoDataPTLines, 
+        // geoDataPTLines, 
         dropDownOptions, 
         name
     }:
@@ -21,15 +23,18 @@ const DropDownMenu = (
         setFilter: React.Dispatch<{"Agency": Set<string>, "Vehicle Type": Set<string>, "Line Number": Set<string>}>,
         map: mapboxgl.Map | null, 
         setDisplayGeoDataPTLines: React.Dispatch<React.SetStateAction<GeoJSON.FeatureCollection<GeoJSON.Geometry>|undefined>>,
-        geoDataPTLines: GeoJSON.FeatureCollection<GeoJSON.Geometry>|undefined, 
+        // geoDataPTLines: GeoJSON.FeatureCollection<GeoJSON.Geometry>|undefined, 
         dropDownOptions: Set<string>| null | undefined, 
         name: string
     }) => {
+
     const [openState, setState] = useState<boolean>(false)
+    const geoDataPTLines = useSelector((state: RootStore) => state.currentGeoDataPTLinesReducer)
     
     const dispalyOptions = () => {
         const options: JSX.Element[] = [];
         let i=0;
+
         dropDownOptions?.forEach((element)=>{
             options.push(<Option offset={offset} key={i+1} ddMenuName={name} setDisplayGeoDataPTLines={setDisplayGeoDataPTLines} setState={setState} filter={filter} setFilter={setFilter} name={element} map={map} geoDataPTLines={geoDataPTLines} number={i+1}/>)
             i+=1
@@ -71,7 +76,7 @@ const Option = (
     // const [offset,,] = useStore('offset');
 
     const addRemoveOption = () => {
-
+        console.log(geoDataPTLines);
         let filterToPass = undefined;
         if(containsDictionaryKey(ddMenuName) === false){
             setState(false)

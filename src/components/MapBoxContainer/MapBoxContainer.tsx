@@ -11,6 +11,9 @@ import selectedLineLayer from './selected_line-layer.json';
 // import { useStore } from 'react-context-hook';
 import setLayerToMap from './functions/setLayerToMap';
 import createLayer from './functions/createLayer';
+import {useSelector, useDispatch} from 'react-redux';
+import { RootStore } from '../../index';
+import allActions from '../../actions/allActions';
 
 
 // The following is required to stop "npm build" from transpiling mapbox code.
@@ -28,7 +31,6 @@ const Map = (
     setMap,
     setAgenciesSet,
     setModalitiesSet,
-    setGeoDataPTLines,
     setShapeIdStopsMap,
     setStopIdsMap
   }: {
@@ -38,11 +40,11 @@ const Map = (
     setMap: React.Dispatch<React.SetStateAction<mapboxgl.Map | null>>,
     setAgenciesSet: React.Dispatch<React.SetStateAction<Set<string>|null|undefined>>,
     setModalitiesSet: React.Dispatch<React.SetStateAction<Set<string>|null|undefined>>,
-    setGeoDataPTLines: React.Dispatch<React.SetStateAction<GeoJSON.FeatureCollection<GeoJSON.Geometry>|undefined>>,
     setShapeIdStopsMap: React.Dispatch<React.SetStateAction<Map<number, ShapeIdStops>|null|undefined>>
     setStopIdsMap: React.Dispatch<React.SetStateAction<Map<number, Stop>|null|undefined>>
   }) => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
+  const dispatch = useDispatch()
   // const [offset, , ] = useStore('offset');
 
   const [lng, ] = useState(4.9041);
@@ -106,7 +108,8 @@ const Map = (
       if(routeLayer !== null){
         setDisplayGeoDataPTLines(routeLayer);
     }
-      setGeoDataPTLines(data);
+      dispatch(allActions.setGeoDataPTLinesActions.setGeoDataPTLinesAction(data))
+      // setGeoDataPTLines(data);
     })   
 
     map.on('click', function (e) {

@@ -1,5 +1,7 @@
 import { useState } from "react";
 // import { useStore } from "react-context-hook";
+import {useSelector, useDispatch} from 'react-redux';
+import { RootStore } from '../../../index';
 import loadLineStringLayer from "../../../loadLayersFunc";
 import styles from './textInputFilter.module.css';
 import {addNewValueToFilter, removeSingleFilterValue, removeAllFilters} from '../filterFunctions'
@@ -9,7 +11,7 @@ const TextInputFilter = ({
     filter,
     setFilter,
     name, 
-    geoDataPTLines,
+    // geoDataPTLines,
     map, 
     setDisplayGeoDataPTLines
 }: {
@@ -17,7 +19,7 @@ const TextInputFilter = ({
     filter: {"Agency": Set<string>, "Vehicle Type": Set<string>, "Line Number": Set<string>},
     setFilter:React.Dispatch<{"Agency": Set<string>, "Vehicle Type": Set<string>, "Line Number": Set<string>}>,
     name: string, 
-    geoDataPTLines: GeoJSON.FeatureCollection<GeoJSON.Geometry>|undefined, 
+    // geoDataPTLines: GeoJSON.FeatureCollection<GeoJSON.Geometry>|undefined, 
     map: mapboxgl.Map | null, 
     setDisplayGeoDataPTLines: React.Dispatch<React.SetStateAction<GeoJSON.FeatureCollection<GeoJSON.Geometry>|undefined>>
 }) => {
@@ -25,6 +27,8 @@ const TextInputFilter = ({
 
     const [openClose, changeOpenCloseState] = useState<boolean>(false);
     const [lineNumber, setNewLineNumber] = useState<string>("");
+    const geoDataPTLines = useSelector((state: RootStore) => state.currentGeoDataPTLinesReducer)
+
     // const [listOfLinesOpen, setListOfLinesOpen] = useState<boolean>(false)
     const updateFilter = (lineNumber: string) => {
         if(lineNumber.length === 0){
