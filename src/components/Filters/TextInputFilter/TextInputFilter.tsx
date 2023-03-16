@@ -27,7 +27,7 @@ const TextInputFilter = ({
 
     const [openClose, changeOpenCloseState] = useState<boolean>(false);
     const [lineNumber, setNewLineNumber] = useState<string>("");
-    const geoDataPTLines = useSelector((state: RootStore) => state.currentGeoDataPTLinesReducer)
+    const geoDataPTLines = useSelector((state: RootStore) => state.currentGeoDataPTLinesReducer).geoData
 
     // const [listOfLinesOpen, setListOfLinesOpen] = useState<boolean>(false)
     const updateFilter = (lineNumber: string) => {

@@ -14,7 +14,7 @@ import { RootStore } from "../../index";
 // import { Slider } from '@material-ui/core'
 // import { useStore } from "react-context-hook";
 const MainComponent = () => {
-    const geoDataPTLines = useSelector((state: RootStore) => state.currentGeoDataPTLinesReducer)
+    const geoDataPTLines = useSelector((state: RootStore) => state.currentGeoDataPTLinesReducer).geoData
     const [map, setMap] = useState<mapboxgl.Map | null>(null);
     // const [geoDataPTLines, setGeoDataPTLines] = useState<GeoJSON.FeatureCollection<GeoJSON.Geometry>>();
     const [displayGeoDataPTLines, setDisplayGeoDataPTLines] = useState<GeoJSON.FeatureCollection<GeoJSON.Geometry>>();

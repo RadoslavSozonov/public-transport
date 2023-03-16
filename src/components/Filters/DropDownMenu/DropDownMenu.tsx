@@ -29,7 +29,7 @@ const DropDownMenu = (
     }) => {
 
     const [openState, setState] = useState<boolean>(false)
-    const geoDataPTLines = useSelector((state: RootStore) => state.currentGeoDataPTLinesReducer)
+    const geoDataPTLines = useSelector((state: RootStore) => state.currentGeoDataPTLinesReducer).geoData;
     
     const dispalyOptions = () => {
         const options: JSX.Element[] = [];
