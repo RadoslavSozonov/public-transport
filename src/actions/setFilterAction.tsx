@@ -4,5 +4,5 @@ const setFilterReducer = (filter: {"Agency": Set<string>, "Vehicle Type": Set<st
         payload: filter
     }
 }
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {setFilterReducer}

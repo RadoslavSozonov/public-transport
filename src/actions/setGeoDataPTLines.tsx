@@ -4,5 +4,5 @@ const setGeoDataPTLinesAction = (newData: GeoJSON.FeatureCollection<GeoJSON.Geom
         payload: newData
     }
 };
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {setGeoDataPTLinesAction};

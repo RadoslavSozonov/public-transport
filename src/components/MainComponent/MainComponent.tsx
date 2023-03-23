@@ -1,7 +1,5 @@
 import { useState } from "react";
 import Map from "../MapBoxContainer/MapBoxContainer"
-import ShapeIdStops from "../../interfaces/ShapeIdStops";
-import Stop from "../../interfaces/Stops";
 import RoutesList from "../RoutesList/RoutesList";
 import styles from "./mainComponentStyle.module.css"
 import DropDownMenu from "../Filters/DropDownMenu/DropDownMenu"

@@ -6,5 +6,5 @@ const setShapeIdStopsMapContainerAction = (shapeIdStopsMapCont: Map<number, Shap
         payload: shapeIdStopsMapCont
     }
 };
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {setShapeIdStopsMapContainerAction};

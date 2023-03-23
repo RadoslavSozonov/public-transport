@@ -4,5 +4,5 @@ const setOffsetAction = (offset: number) => {
         payload: offset
     }
 };
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {setOffsetAction};

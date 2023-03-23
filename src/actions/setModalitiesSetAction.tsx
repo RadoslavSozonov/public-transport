@@ -4,5 +4,5 @@ const setModlitiesSetAction = (modalitiesSet: Set<string>|null) => {
         payload: modalitiesSet
     }
 };
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {setModlitiesSetAction};
