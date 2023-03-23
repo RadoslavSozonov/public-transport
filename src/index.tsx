@@ -12,7 +12,12 @@ import {Provider} from 'react-redux'
 
 console.log("1");
 
-const store = configureStore({reducer: rootReducer});
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: false,
+  }),
+});
 export type RootStore = ReturnType<typeof rootReducer>;
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

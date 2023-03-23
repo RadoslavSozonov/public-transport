@@ -1,6 +1,14 @@
 import { MapActionType } from "../actions/ActionTypes";
 
-const currentMapReducer = (state={} as mapboxgl.Map , action: MapActionType) => {
+export interface InitialStateI {
+    map: mapboxgl.Map | null;
+}
+
+const initialState: InitialStateI = {
+    map: null
+}
+
+const currentMapReducer = (state: InitialStateI = initialState , action: MapActionType): InitialStateI => {
     switch(action.type){
         case "SET_MAP":
             return {
