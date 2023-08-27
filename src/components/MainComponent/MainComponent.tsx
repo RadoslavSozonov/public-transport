@@ -17,16 +17,7 @@ const MainComponent = () => {
     const [map, setMap] = useState<mapboxgl.Map | null>(null);
     // const [geoDataPTLines, setGeoDataPTLines] = useState<GeoJSON.FeatureCollection<GeoJSON.Geometry>>();
     const [displayGeoDataPTLines, setDisplayGeoDataPTLines] = useState<GeoJSON.FeatureCollection<GeoJSON.Geometry>>();
-    // const shapeIdStopsMapCont = useSelector((state: RootStore) => state.stopsReducer.shapeIdStopsMapCont)
-    // const [shapeIdStopsMapCont, setShapeIdStopsMap] = useState<Map<number, ShapeIdStops>|null>(); 
-    // const [stopIdsMapCont, setStopIdsMap] = useState<Map<number, Stop>|null>();
-    // const stopIdsMapCont = useSelector((state: RootStore) => state.stopsReducer.stopIdMapCont)
-    // const [agenciesSet, setAgenciesSet] = useState<Set<string>|null>();
-    // const [modalitiesSet, setModalitiesSet] = useState<Set<string>|null>();
-    // const [filter, setFilter] = useState<{"Agency": Set<string>, "Vehicle Type": Set<string>, "Line Number": Set<string>}>({"Agency": new Set<string>(), "Vehicle Type": new Set<string>(), "Line Number": new Set<string>()})
-    // const [selectedRoute, setSelectedRoute] = useState<[number, string, string, string, string, string, boolean]>([-1, "", "", "", "", "", false])
-    // const [offset, setOffset] = useState<number>(0);
-    // const [, setOffset, ] = useStore('offset')
+
     const dispatch = useDispatch();
     const sliderChange = (newValue: number | number[]) => {
         // console.log(newValue);
@@ -84,8 +75,6 @@ const MainComponent = () => {
 
 const RemoveOption = ({map, setDisplayGeoDataPTLines}:
     {
-        // filter: {"Agency": Set<string>, "Vehicle Type": Set<string>, "Line Number": Set<string>}, 
-        // setFilter: React.Dispatch<{"Agency": Set<string>, "Vehicle Type": Set<string>, "Line Number": Set<string>}>, 
         map: mapboxgl.Map | null, 
         setDisplayGeoDataPTLines: React.Dispatch<React.SetStateAction<GeoJSON.FeatureCollection<GeoJSON.Geometry>|undefined>>
     }) => {

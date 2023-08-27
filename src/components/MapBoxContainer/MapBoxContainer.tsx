@@ -25,23 +25,12 @@ mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 
 const Map = (
   {
-    // offset,
     setDisplayGeoDataPTLines,
-    // setSelectedRoute,
     setMap,
-    // setAgenciesSet,
-    // setModalitiesSet,
-    // setShapeIdStopsMap,
-    // setStopIdsMap
   }: {
     // offset: number,
     setDisplayGeoDataPTLines: React.Dispatch<React.SetStateAction<GeoJSON.FeatureCollection<GeoJSON.Geometry>|undefined>>,
-    // setSelectedRoute: React.Dispatch<React.SetStateAction<[number, string, string, string, string, string, boolean]>>,
     setMap: React.Dispatch<React.SetStateAction<mapboxgl.Map | null>>,
-    // setAgenciesSet: React.Dispatch<React.SetStateAction<Set<string>|null|undefined>>,
-    // setModalitiesSet: React.Dispatch<React.SetStateAction<Set<string>|null|undefined>>,
-    // setShapeIdStopsMap: React.Dispatch<React.SetStateAction<Map<number, ShapeIdStops>|null|undefined>>
-    // setStopIdsMap: React.Dispatch<React.SetStateAction<Map<number, Stop>|null|undefined>>
   }) => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const dispatch = useDispatch()
