@@ -48,7 +48,7 @@ const jsonInterfaceConverterRoutes = (
     const filterLineNumber = filters["Line Number"]
     try {
         // console.log(filters);
-        console.log(data);
+        // console.log(data);
         // console.log(data.features);
         // console.log(filters);
         data.features.forEach((element) => {

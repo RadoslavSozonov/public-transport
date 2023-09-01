@@ -132,7 +132,9 @@ const Map = (
       if(selectedFeature!==undefined && selectedFeature !== null){
 
         const properties = JSON.parse(JSON.stringify(selectedFeature))
-        const gid = properties["gid"] as number;
+        console.log(properties);
+        
+        const gid = properties["id"] as number;
 
         const id = selectedFeature["shape_id"]
         const origin = selectedFeature["origin"];
