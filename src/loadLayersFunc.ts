@@ -21,13 +21,19 @@ const loadLineStringLayer = (
       return [{} as GeoJSON.FeatureCollection<GeoJSON.Geometry>, null, null]
     }
     
+    // console.log(data);
+    
     const [dataRoutesMap, agenciesSet, modalitiesSet ] = jsonInterfaceConverterRoutes(data, filters);
+    // console.log(dataRoutesMap);
+    
     const dataRoutesArray: ShapeIds[] = []
     
     dataRoutesMap?.forEach((element) => {
       dataRoutesArray.push(element)
     })
     const routeLayer = createLayer("LineString", dataRoutesArray)
+    // console.log(routeLayer);
+    
     setLayerToMap(
       'gtfs_shapes_agency_vehicle_type_number_stops_info', 
       JSON.parse(JSON.stringify(connectionsLayer)), 

@@ -31,11 +31,11 @@ const DropDownMenu = (
 
     const [openState, setState] = useState<boolean>(false)
     const geoDataPTLines = useSelector((state: RootStore) => state.currentGeoDataPTLinesReducer).geoData;
-
+    
     const dispalyOptions = () => {
         const options: JSX.Element[] = [];
         let i=0;
-
+        
         dropDownOptions?.forEach((element)=>{
             options.push(<Option key={i+1} ddMenuName={name} setDisplayGeoDataPTLines={setDisplayGeoDataPTLines} setState={setState} name={element} map={map} geoDataPTLines={geoDataPTLines} number={i+1}/>)
             i+=1

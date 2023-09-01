@@ -75,7 +75,7 @@ const Map = (
 
     // getDataFunction();
     // const dataShapeStops = 
-    fetchGtfsTable('gtfs_stop_shape_ids_geom').then((dataShapeStops)=>{
+    fetchGtfsTable('gtfs_stop_shape_ids_geom').then((dataShapeStops)=>{      
       const {shapeIdStopsMap, stopIdsMap} = jsonInterfaceConverter(dataShapeStops);
       // console.log(shapeIdStopsMap, stopIdsMap);
       routesMap = shapeIdStopsMap;
@@ -90,21 +90,24 @@ const Map = (
     
     map.on('load', async function (){    
       
-      
       const data = await fetchGtfsTable('gtfs_shapes_agency_vehicle_type_number_stops_info');
       dataComponent=data
-
+      // console.log(data);
+      
       const [routeLayer, agenciesSet, modalitiesSet] = loadLineStringLayer(map, data, {"Agency": new Set<string>(), "Vehicle Type": new Set<string>(), "Line Number": new Set<string>()}, offset as number)
       dispatch(allActions.setAgencieSetAction.setAgenciesSetAction(agenciesSet));
+      // console.log(agenciesSet);
+      
       // setAgenciesSet(agenciesSet);
       dispatch(allActions.setModalitiesSetAction.setModlitiesSetAction(modalitiesSet));
+      // console.log(modalitiesSet);
       // setModalitiesSet(modalitiesSet);
       if(routeLayer !== null){
-        // setDisplayGeoDataPTLines(routeLayer);
-        // dispatch(allActions.setDisplayGeoDataPTLines.setDisplayGeoDataPTLines(routeLayer));
-    }
+        setDisplayGeoDataPTLines(routeLayer);
+        dispatch(allActions.setDisplayGeoDataPTLines.setDisplayGeoDataPTLines(routeLayer));
+      }
       dispatch(allActions.setGeoDataPTLinesActions.setGeoDataPTLinesAction(data))
-      // setGeoDataPTLines(data);
+      setDisplayGeoDataPTLines(data);
     })   
 
     map.on('click', function (e) {

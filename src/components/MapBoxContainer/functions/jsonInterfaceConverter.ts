@@ -16,7 +16,8 @@ const jsonInterfaceConverter = (
             const stopNames = property.stop_names;
             const stopGeoms = JSON.parse(JSON.stringify(element.geometry))["coordinates"];
             property.geom = stopGeoms;
-            mapShapeIdStops.set(property.gid, property);
+            mapShapeIdStops.set(property.route_id, property);
+            
             for(let i = 0; i < stops; i++){
                 const stop:Stop = {
                     stopId: stopIds[i],
@@ -46,9 +47,9 @@ const jsonInterfaceConverterRoutes = (
     const filterModalities = filters["Vehicle Type"]
     const filterLineNumber = filters["Line Number"]
     try {
-        console.log(filters);
+        // console.log(filters);
         console.log(data);
-        console.log(data.features);
+        // console.log(data.features);
         // console.log(filters);
         data.features.forEach((element) => {
             const property: ShapeIds = JSON.parse(JSON.stringify(element.properties))
@@ -82,10 +83,11 @@ const jsonInterfaceConverterRoutes = (
             if(element.geometry===null){
                 return;
             }
+            // console.log(element);
             
             const routeGeoms = JSON.parse(JSON.stringify(element.geometry))["coordinates"];
             property.geom = routeGeoms;
-            shapeIdsMap.set(property.gid, property)
+            shapeIdsMap.set(property.route_id, property)
             agenciesSet.add(property.agency_id);
             modalitiesSet.add(property.vehicle_type)
         })
