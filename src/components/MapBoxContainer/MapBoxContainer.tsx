@@ -72,18 +72,14 @@ const Map = (
       zoom: 10,
     });
     setMap(map);
-
-    // getDataFunction();
-    // const dataShapeStops = 
     fetchGtfsTable('gtfs_stop_shape_ids_geom').then((dataShapeStops)=>{      
       const {shapeIdStopsMap, stopIdsMap} = jsonInterfaceConverter(dataShapeStops);
-      // console.log(shapeIdStopsMap, stopIdsMap);
+
       routesMap = shapeIdStopsMap;
       stopsMap = stopIdsMap;
-      // setShapeIdStopsMap(shapeIdStopsMap);
+
       dispatch(allActions.setShapeIdStopsMapContainerAction.setShapeIdStopsMapContainerAction(shapeIdStopsMap));
       dispatch(allActions.setStopIdsMapContAction.setStopIdsMapContAction(stopIdsMap));
-      // setStopIdsMap(stopIdsMap);
     })
     
     
@@ -92,16 +88,12 @@ const Map = (
       
       const data = await fetchGtfsTable('gtfs_shapes_agency_vehicle_type_number_stops_info');
       dataComponent=data
-      // console.log(data);
       
       const [routeLayer, agenciesSet, modalitiesSet] = loadLineStringLayer(map, data, {"Agency": new Set<string>(), "Vehicle Type": new Set<string>(), "Line Number": new Set<string>()}, offset as number)
       dispatch(allActions.setAgencieSetAction.setAgenciesSetAction(agenciesSet));
-      // console.log(agenciesSet);
-      
-      // setAgenciesSet(agenciesSet);
+
       dispatch(allActions.setModalitiesSetAction.setModlitiesSetAction(modalitiesSet));
-      // console.log(modalitiesSet);
-      // setModalitiesSet(modalitiesSet);
+
       if(routeLayer !== null){
         setDisplayGeoDataPTLines(routeLayer);
         dispatch(allActions.setDisplayGeoDataPTLines.setDisplayGeoDataPTLines(routeLayer));
@@ -132,7 +124,6 @@ const Map = (
       if(selectedFeature!==undefined && selectedFeature !== null){
 
         const properties = JSON.parse(JSON.stringify(selectedFeature))
-        console.log(properties);
         
         const gid = properties["route_id"] as number;
 
